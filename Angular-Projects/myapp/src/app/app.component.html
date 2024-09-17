@@ -1,0 +1,130 @@
+<!-- 
+
+<div>
+  <h1>Parent Component</h1>
+  <app-color [title]="title"> This is demonstrating After Content init</app-color>
+  <button (click)="changeTitle()">Change Title</button>
+</div> -->
+
+
+
+  <div class="container" style="border: solid 2px black ;">
+    <h2>Product Data</h2>
+    <p>Product Id: {{productid}} </p>
+    <p> Description: {{description}}
+
+    </p>
+    <p>Available: {{available}} </p>
+    <p>Qty : {{qty}}</p>
+    
+    <p>Enter order quantity: <input type="text" name="orderqty" [(ngModel)]="orderqty" #inputqty />{{orderqty}}</p>
+  <!-- <p> Order Qty Available: {{ isOrderedQtyAvailable}}</p> -->
+
+  <!-- <p *ngIf >
+    Ordered Qty Available: <span *ngIf = "orderqty < qty " >
+
+    </span>
+  </p> -->
+
+  <div [innerHTML] = "isOrderedQtyAvailable"></div>
+
+  <div *ngIf="qty > orderqty; else myTemplate">
+    Ordered Quantity Available:
+</div>
+
+<p>Order Date: {{ orderDate | date : "dd/MM/yyyy hh:mm" }}</p>
+
+<ng-template #myTemplate> Order Quantity Not Available</ng-template>
+  <!-- <div class="container" style="border: solid 2px black" *ngFor="let product of products">
+    <p>Description: {{ product.description }}</p>
+    <p>Product ID: {{ product.productId }}</p>
+    <p>Price: {{ product.price }}</p>
+  </div>
+   -->
+
+
+
+  <div class="grid-container">
+    <div 
+      class="product-card" 
+    
+      *ngFor="let product of products; index as i; even as isEven;" >
+
+      <span *ngIf = "isEven; else isOdd" [style.background-color]="evenColor">
+        <ul>
+
+       
+       <li> {{i}}</li> 
+       <li>{{product.productId}} </li> 
+        <li>{{product.description}}</li>
+        <li>{{product.price}}</li>
+      </ul>
+      </span>
+
+      <ng-template #isOdd>
+        <span  [style.background-color]="oddColor">
+          <ul>
+
+       
+            <li> {{i}}</li> 
+            <li>{{product.productId}} </li> 
+             <li>{{product.description}}</li>
+             <li>{{product.price}}</li>
+           </ul>
+        </span>
+      </ng-template>
+     
+      <!-- <p>Description: {{ product.description }}</p>
+      <p>Product ID: {{ product.productId }}</p>
+      <p>Price: {{ product.price }}</p> -->
+    </div>
+  </div>
+
+  <p> Delivery:
+    <span [style.background-color] ="deliverColor">&nbsp;&nbsp;&nbsp;&nbsp;"</span>
+  </p>
+
+  <!-- <p>
+    <button name="placeOrder" (click)= "printOrder(inputqty.value)">PlaceOrder</button>
+
+  </p> -->
+  <p>
+    <button name="placeOrder" (click)="printOrder(inputqty.value)" [disabled]="orderqty > qty">Add to Cart</button>
+  </p>
+  
+  <div [ngSwitch]="inputqty.value">
+    <span *ngSwitchCase="201">..Fully Available</span>
+    <span *ngSwitchCase="200">..Partially Available</span>
+    <span *ngSwitchCase="199">..Not Available</span>
+    <span *ngSwitchDefault>Unknown Availability</span>
+  </div>
+
+  </div>
+
+  <div style="border: solid 2px green">
+    <app-color></app-color>
+  
+   
+  </div>
+  
+  <div class="container" style="border: solid 2px orange;">
+
+    <input type="radio"  (change)="bgColor('green')" /> Green
+
+</div>
+
+  <div style="border: solid 2px orangered">
+
+    <app-data></app-data>
+    <br>
+    <app-reactive></app-reactive>
+    <br>
+    <app-formbuilder></app-formbuilder>
+    <app-test-observable></app-test-observable>
+   
+  </div>
+
+
+
+  
+  

@@ -1,0 +1,15 @@
+<span>
+  <h2>{{title}} app is running!</h2>
+</span>
+
+<div class="container">
+  <h4>Parent Component</h4>
+  <p>Items</p>
+  <ul>
+    <li *ngFor="let item of items">{{ item }}</li> 
+  </ul>
+</div>
+
+<div>
+  <app-child (childEvent)="updateParent($event)"></app-child>
+</div>
